@@ -32,9 +32,11 @@ public:
     virtual std::string getCipherCitation()
     {
         std::string s;
-        s += "Vigenere Cipher. (n.d.).Retrieved July 16, 2020, \n";
-        s += "from https ://crypto.interactive-maths.com/vigenegravere-cipher.html";
+        s + "Bruen, A.A., & amp; Forcinito, M.A. (2005).The Vigenere Cipher.In Cryptography, ";
+        s += "information theoryand error - correction: A handbook for the 21st century(pp. 21 - 22).Hoboken ";
+        s += ": Wiley.doi : https ://books.google.com/books?id=fd2LtVgFzoMC&amp;pg=PA21#v=onepage&amp;q&amp;f=false";
         return s;
+        
     }
 
     /**********************************************************
@@ -47,20 +49,30 @@ public:
 
         // TODO: please format your pseudocode
         // The encrypt pseudocode
-       // str = "insert the encryption pseudocode\n";
         str = "encrypt(plainText, password)\n";
+        str += "   ciperText\n";
+        str += "   key <- createKey(plainText, password)\n";
+        str += "   FOR i = 0 to size of plainText\n";
+        str += "      temp <- plainText[i] + key[i] % alphabet size\n";
+        str += "      temp += minimum alphabet value\n";
+        str += "      ciperText.push_back(temp)\n";
         str += "   RETURN cipherText\n\n";
 
         // The decrypt pseudocode
-        //str += "insert the decryption pseudocode\n";
         str += "decrypt(cipherText, password)\n";
+        str += "   plainText\n";
+        str += "   FOR all of cipherText\n"; 
+        str += "      temp <- cipherText[i] - key[i] + alphabest size  + alphabet minvalue) % alphabet size\n";
+        str += "      temp += alphabet min value\n";
+        str += "      plainText.push_back(temp)\n";
         str += "   RETURN plainnText\n\n";
 
         // helper the make key the same size as the text
         str += "createKey(plainText, password)\n";
+        str += "   key\n";
         str += "   FOR i = 0 to size of plainText\n";
-        str += "      char <- password[i% size of password]\n";
-        str += "      key push char\n";
+        str += "      char <- password[i% password size]\n";
+        str += "      key.push_back(char)\n";
         str += "   RETURN key\n\n";
 
 
@@ -85,7 +97,7 @@ public:
             char x = (plainText[i] + key[i]) % sizeAlphabet;
             assert(x >= 0 && x < sizeAlphabet);
 
-            // convert into alphabets(ASCII) 
+            // starts at the alphabest minimum value
             x += valueMinimum;
 
             cipherText.push_back(x);
@@ -106,10 +118,10 @@ public:
        
         for (int i = 0; i < cipherText.size(); i++)
         {
-            // converting in range 0-25 
+            // converting in range 0-94 total alpahbet range
             char x = (cipherText[i] - key[i] + '|' ) % sizeAlphabet;
 
-            // convert into alphabets(ASCII) 
+            // move to first alphabet value
             x += valueMinimum;
             plainText.push_back(x);
         }
@@ -121,7 +133,8 @@ public:
     * TODO: ADD description
     **********************************************************/
     std::string createKey(const std::string& cipherText, const std::string& password) {
-        std::string createdKey;
+        std::string createdKey = "";
+        // create a key based on password that is the same size as the text to be encrypted
        for (int i = 0; i < cipherText.size(); i++) {
            char temp = password[i % password.size()];
              createdKey.push_back(temp);
