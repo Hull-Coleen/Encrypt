@@ -11,19 +11,17 @@
  *******************************************************************/
 class Cipher01 : public Cipher
 {
-    
-        char valueMinimum = ' ';
-        char valueMaximum = '~';
-        char sizeAlphabet = valueMaximum - valueMinimum;
-        std::string key = "";
-    
+    char valueMinimum = ' ';
+    char valueMaximum = '~';
+    char sizeAlphabet = valueMaximum - valueMinimum;
+    std::string key = "";
 
 public:
 
-    virtual std::string getPseudoAuth() { return "pseudocode author"; }
+    virtual std::string getPseudoAuth() { return "Coleen Hull"; }
     virtual std::string getCipherName() { return "Vigenere Cipher"; }
-    virtual std::string getEncryptAuth() { return "encrypt author"; }
-    virtual std::string getDecryptAuth() { return "decrypt author"; }
+    virtual std::string getEncryptAuth() { return "Corbin Hughes"; }
+    virtual std::string getDecryptAuth() { return "Sam Wirhtlin"; }
 
     /***********************************************************
      * GET CIPHER CITATION
@@ -83,14 +81,15 @@ public:
     
     /**********************************************************
      * ENCRYPT
-     * TODO: ADD description
+     * PARAMETERS: takes a string plaiText and string password
+     * RETURNS: encrypted text
      **********************************************************/
     virtual std::string encrypt(const std::string& plainText,
         const std::string& password)
     {
         std::string cipherText = "";
         key = createKey(plainText, password);
-            ;
+        // loop trough entire plain text
         for (int i = 0; i < plainText.size(); i++)
         {
             // converting in range  
@@ -99,23 +98,22 @@ public:
 
             // starts at the alphabest minimum value
             x += valueMinimum;
-
+            // add to string
             cipherText.push_back(x);
         }
- 
-        // TODO - Add your code here
         return cipherText;
     }
 
     /**********************************************************
      * DECRYPT
-     * TODO: ADD description
+     * PARAMETERS: takes a string encrpyted or cipher text and string password
+     * RETURNS: plain text
      **********************************************************/
     virtual std::string decrypt(const std::string& cipherText,
         const std::string& password)
     {
         std::string plainText = "";
-       
+        // loop through entire encrypted text
         for (int i = 0; i < cipherText.size(); i++)
         {
             // converting in range 0-94 total alpahbet range
@@ -123,14 +121,16 @@ public:
 
             // move to first alphabet value
             x += valueMinimum;
+            // add to string
             plainText.push_back(x);
         }
-        // TODO - Add your code here
+        
         return plainText;
     }
     /**********************************************************
     * CREATEKEY
-    * TODO: ADD description
+    * PARAMETERS: takes a string encrpyted or cipher text and string password
+    * RETURNS: key to create encrypted and plain text
     **********************************************************/
     std::string createKey(const std::string& cipherText, const std::string& password) {
         std::string createdKey = "";
@@ -140,7 +140,6 @@ public:
              createdKey.push_back(temp);
        }
        return createdKey;
-
     }
 };
 
